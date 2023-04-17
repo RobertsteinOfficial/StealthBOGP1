@@ -1,0 +1,42 @@
+Stealth game
+
+FEATURES
+
+Player
+	Movement
+		Produzione rumore
+	Jump
+	Crouch
+	Combat
+		Danno melee frontale
+		One shot alle spalle
+		Bait sonora
+
+
+Enemies
+
+	IA 
+		Sistema di sensi
+		Patrolling
+		Searching
+		Chasing
+		Attacking
+
+	Movement
+	Combat
+		Danno melee
+
+Traps
+
+	Camera
+	Sensori laser
+
+Interactables
+
+	Luci
+	Porta
+	Ascensore
+
+Key
+
+
