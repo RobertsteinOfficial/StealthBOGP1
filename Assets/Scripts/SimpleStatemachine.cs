@@ -3,14 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public enum State
-{
-    Idle,
-    Patrolling,
-    Chasing,
-    Dead
-}
-
 public class SimpleStatemachine : MonoBehaviour
 {
     public State actualState = State.Idle;
@@ -18,10 +10,13 @@ public class SimpleStatemachine : MonoBehaviour
     public Transform[] targets;
 
     int actualTarget = 0;
+    Transform myTarget;
+    Animator anim;
 
     private void Awake()
     {
         agent = GetComponent<NavMeshAgent>();
+        anim = transform.GetChild(0).GetComponent<Animator>();
     }
 
     private void Update()
@@ -30,32 +25,43 @@ public class SimpleStatemachine : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            actualState = State.Patrolling;
+            actualState = State.Patrol;
         }
         else if (Input.GetKeyDown(KeyCode.Escape))
         {
-            actualState = State.Chasing;
+            actualState = State.Chase;
         }
 
 
-        if (actualState == State.Patrolling)
+        if (actualState == State.Patrol)
         {
             Debug.Log("Patrolling");
             agent.SetDestination(targets[actualTarget].position);
+            myTarget = targets[actualTarget];
 
-            if(Vector3.Distance(agent.destination, transform.position) < 2)
+            if (Vector3.Distance(agent.destination, transform.position) < 2)
             {
                 actualTarget++;
-                if(actualTarget >= targets.Length)
+                if (actualTarget >= targets.Length)
                 {
                     actualTarget = 0;
                 }
             }
 
         }
-        else if (actualState == State.Chasing)
+        else if (actualState == State.Chase)
         {
             transform.Translate(Vector3.forward * 5 * Time.deltaTime);
+        }
+
+
+        if (agent.remainingDistance < agent.stoppingDistance)
+        {
+            anim.SetBool("IsMoving", false);
+        }
+        else
+        {
+            anim.SetBool("IsMoving", true);
         }
     }
 }
