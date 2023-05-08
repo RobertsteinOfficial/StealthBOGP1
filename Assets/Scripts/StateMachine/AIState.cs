@@ -9,7 +9,8 @@ public enum State
     Patrol,
     Chase,
     Attack,
-    Dead
+    Dead,
+    Flee
 }
 
 public enum Event
@@ -35,6 +36,7 @@ public class AIState
     float visDist = 10.0f;
     float visAngle = 30.0f;
     float shootDist = 7.0f;
+    float perceptionDist = 2.5f;
 
     public AIState(GameObject _npc, NavMeshAgent _agent, Animator _anim, Transform _player, Transform[] _checkpoints)
     {
@@ -82,6 +84,19 @@ public class AIState
     {
         Vector3 direction = player.position - npc.transform.position;
         if (direction.magnitude < shootDist)
+        {
+            return true;
+        }
+
+        return false;
+    }
+
+    public bool IsPlayerBehind()
+    {
+        Vector3 dir = npc.transform.position - player.position;
+
+        float angle = Vector3.Angle(dir, npc.transform.forward);
+        if (dir.magnitude < perceptionDist && angle < visAngle)
         {
             return true;
         }

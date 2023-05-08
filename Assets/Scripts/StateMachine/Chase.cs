@@ -24,14 +24,14 @@ public class Chase : AIState
     {
         agent.SetDestination(player.position);
 
-        if(agent.hasPath)
+        if (agent.hasPath)
         {
-            if(CanAttackPlayer())
+            if (CanAttackPlayer())
             {
                 nextState = new Attack(npc, agent, anim, player, checkpoints);
                 stage = Event.Exit;
             }
-            else
+            else if (!CanSeePlayer())
             {
                 nextState = new Patrol(npc, agent, anim, player, checkpoints);
                 stage = Event.Exit;

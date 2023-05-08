@@ -17,7 +17,21 @@ public class Patrol : AIState
 
     public override void Enter()
     {
-        currentIndex = 0;
+        float dist = Mathf.Infinity;
+
+        for (int i = 0; i < checkpoints.Length; i++)
+        {
+            Transform currentCheckpoint = checkpoints[i];
+            float tempDist = Vector3.Distance(npc.transform.position, currentCheckpoint.transform.position);
+
+            if(tempDist < dist)
+            {
+                currentIndex = i - 1;
+                dist = tempDist;
+            }
+        }
+
+
         anim.SetBool("IsMoving", true);
         base.Enter();
     }
@@ -37,6 +51,11 @@ public class Patrol : AIState
         if (CanSeePlayer())
         {
             nextState = new Chase(npc, agent, anim, player, checkpoints);
+            stage = Event.Exit;
+        }
+        else if(IsPlayerBehind())
+        {
+            nextState = new Flee(npc, agent, anim, player, checkpoints);
             stage = Event.Exit;
         }
     }
