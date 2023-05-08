@@ -33,9 +33,9 @@ public class AIState
     protected Transform[] checkpoints;
 
     //Senses
-    float visDist = 10.0f;
-    float visAngle = 30.0f;
-    float shootDist = 7.0f;
+    float visDist = 40.0f;
+    float visAngle = 60.0f;
+    float shootDist = 3.0f;
     float perceptionDist = 2.5f;
 
     public AIState(GameObject _npc, NavMeshAgent _agent, Animator _anim, Transform _player, Transform[] _checkpoints)

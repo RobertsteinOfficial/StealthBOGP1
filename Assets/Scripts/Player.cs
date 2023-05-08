@@ -16,6 +16,7 @@ public class Player : MonoBehaviour
     bool desiredJump;
     bool isStealthMode;
     Vector3 velocity, desiredVelocity;
+    public Vector3 CurrentVelocity { get { return rb.velocity; } }
 
     //Refs
     private Rigidbody rb;
@@ -37,6 +38,7 @@ public class Player : MonoBehaviour
 
         if (Input.GetButtonDown("Crouch"))
             SwitchStealth();
+
     }
 
     private void FixedUpdate()
