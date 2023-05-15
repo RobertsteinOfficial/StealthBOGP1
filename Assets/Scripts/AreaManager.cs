@@ -4,9 +4,10 @@ using UnityEngine;
 
 public class AreaManager : MonoBehaviour
 {
+    [SerializeField] GameObject[] hidingSpots;
     [SerializeField] Transform safeZone;
+    public GameObject[] HidingSpots { get { return hidingSpots; } }
     public Transform SafeZone { get { return safeZone; } }
-
 
     public static AreaManager Instance { get; private set; }
 

@@ -11,12 +11,12 @@ public class Chase : AIState
         : base(_npc, _agent, _anim, _player, _checkpoints)
     {
         name = State.Chase;
-        agent.speed = 6;
-        agent.isStopped = false;
     }
 
     public override void Enter()
     {
+        agent.speed = 6;
+        agent.isStopped = false;
         anim.SetBool("IsMoving", true);
         anim.speed = 2f;
         playerComponent = player.GetComponent<Player>();
@@ -36,7 +36,7 @@ public class Chase : AIState
             }
             else if (!CanSeePlayer())
             {
-                nextState = new Patrol(npc, agent, anim, player, checkpoints);
+                nextState = new Wander(npc, agent, anim, player, checkpoints);
                 stage = Event.Exit;
             }
         }

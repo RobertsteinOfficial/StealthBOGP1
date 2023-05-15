@@ -24,7 +24,7 @@ public class Patrol : AIState
             Transform currentCheckpoint = checkpoints[i];
             float tempDist = Vector3.Distance(npc.transform.position, currentCheckpoint.transform.position);
 
-            if(tempDist < dist)
+            if (tempDist < dist)
             {
                 currentIndex = i - 1;
                 dist = tempDist;
@@ -53,9 +53,9 @@ public class Patrol : AIState
             nextState = new Chase(npc, agent, anim, player, checkpoints);
             stage = Event.Exit;
         }
-        else if(IsPlayerBehind())
+        else if (IsPlayerBehind())
         {
-            nextState = new Flee(npc, agent, anim, player, checkpoints);
+            nextState = new Hide(npc, agent, anim, player, checkpoints);
             stage = Event.Exit;
         }
     }

@@ -22,5 +22,6 @@ public class AIController : MonoBehaviour
     private void Update()
     {
         currentState = currentState.Process();
+        Debug.Log(currentState.name);
     }
 }

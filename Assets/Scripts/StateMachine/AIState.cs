@@ -10,7 +10,10 @@ public enum State
     Chase,
     Attack,
     Dead,
-    Flee
+    Flee,
+    Evade,
+    Wander,
+    Hide
 }
 
 public enum Event
