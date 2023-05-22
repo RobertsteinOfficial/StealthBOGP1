@@ -21,7 +21,7 @@ public class Idle : AIState
     {
         if (CanSeePlayer())
         {
-            nextState = new Chase(npc, agent, anim, player, checkpoints);
+            nextState = new Hide(npc, agent, anim, player, checkpoints);
             stage = Event.Exit;
         }
         else if (Random.Range(0, 100) < 10)

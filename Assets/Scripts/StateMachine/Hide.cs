@@ -23,8 +23,8 @@ public class Hide : AIState
 
     public override void Update()
     {
-        SimpleHide();
-        //AdvancedHide();
+        //SimpleHide();
+        AdvancedHide();
     }
 
 
@@ -92,7 +92,7 @@ public class Hide : AIState
 
         Vector3 hideDestination = hit.point + chosenDir.normalized * 4;
 
-        if (Vector3.SqrMagnitude(chosenSpot - npc.transform.position) < 9)
+        if (Vector3.SqrMagnitude(chosenSpot - npc.transform.position) < 30)
         {
             nextState = new Idle(npc, agent, anim, player, checkpoints);
             stage = Event.Exit;
