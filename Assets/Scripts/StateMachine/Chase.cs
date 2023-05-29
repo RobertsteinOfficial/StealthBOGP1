@@ -29,6 +29,13 @@ public class Chase : AIState
 
         if (agent.hasPath)
         {
+            if(CanSeeMe())
+            {
+                nextState = new Hide(npc, agent, anim, player, checkpoints);
+                stage = Event.Exit;
+                return;
+            }
+
             if (CanAttackPlayer())
             {
                 nextState = new Attack(npc, agent, anim, player, checkpoints);
@@ -36,7 +43,7 @@ public class Chase : AIState
             }
             else if (!CanSeePlayer())
             {
-                nextState = new Wander(npc, agent, anim, player, checkpoints);
+                nextState = new Patrol(npc, agent, anim, player, checkpoints);
                 stage = Event.Exit;
             }
         }

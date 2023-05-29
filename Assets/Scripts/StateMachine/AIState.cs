@@ -41,6 +41,8 @@ public class AIState
     float shootDist = 3.0f;
     float perceptionDist = 2.5f;
 
+    LayerMask playerMask;
+
     public AIState(GameObject _npc, NavMeshAgent _agent, Animator _anim, Transform _player, Transform[] _checkpoints)
     {
         stage = Event.Enter;
@@ -49,6 +51,8 @@ public class AIState
         anim = _anim;
         player = _player;
         checkpoints = _checkpoints;
+
+        playerMask |= (1 << 9);
     }
 
     public virtual void Enter() { stage = Event.Update; }
@@ -79,6 +83,29 @@ public class AIState
         {
             return true;
         }
+
+        return false;
+    }
+
+    public bool CanSeeMe()
+    {
+        Vector3 direction = npc.transform.position + Vector3.up * 0.5f - player.position + Vector3.up * 0.5f;
+        float angle = Vector3.Angle(player.GetComponent<Player>().CurrentVelocity, direction);
+
+        if (angle < visAngle)
+        {
+            RaycastHit hit;
+            Ray ray = new Ray(player.position + Vector3.up * 0.5f, direction);
+            Debug.DrawRay(player.position + Vector3.up * 0.5f, direction, Color.blue);
+            if (Physics.Raycast(ray, out hit, visDist, playerMask))
+            {
+                Debug.Log(hit.transform.name);
+                return true;
+            }
+
+            Debug.Log(hit.transform.name);
+        }
+
 
         return false;
     }

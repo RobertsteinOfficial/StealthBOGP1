@@ -34,6 +34,13 @@ public class Attack : AIState
 
         Debug.DrawRay(npc.transform.position, npc.transform.forward * 3, Color.red);
 
+        if (CanSeeMe())
+        {
+            nextState = new Hide(npc, agent, anim, player, checkpoints);
+            stage = Event.Exit;
+            return;
+        }
+
         if (!CanAttackPlayer())
         {
             nextState = new Idle(npc, agent, anim, player, checkpoints);
