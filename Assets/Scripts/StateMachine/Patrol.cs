@@ -50,14 +50,25 @@ public class Patrol : AIState
 
         if (CanSeePlayer())
         {
-            nextState = new Hide(npc, agent, anim, player, checkpoints);
-            stage = Event.Exit;
+            if (CanSeeMe())
+            {
+                nextState = new Hide(npc, agent, anim, player, checkpoints);
+                stage = Event.Exit;
+                return;
+            }
+            else
+            {
+                nextState = new Chase(npc, agent, anim, player, checkpoints);
+                stage = Event.Exit;
+                return;
+            }
+
         }
-        else if (IsPlayerBehind())
-        {
-            nextState = new Hide(npc, agent, anim, player, checkpoints);
-            stage = Event.Exit;
-        }
+        //else if (IsPlayerBehind())
+        //{
+        //    nextState = new Hide(npc, agent, anim, player, checkpoints);
+        //    stage = Event.Exit;
+        //}
     }
 
     public override void Exit()

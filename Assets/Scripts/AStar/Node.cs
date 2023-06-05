@@ -2,38 +2,52 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/*
+OPEN
+CLOSED
 
-// Lista di nodi da valutare -> OPEN
-// Lista di nodi esaminati -> CLOSED
+aggiungo il nodo iniziale in OPEN
+ 
+loop
+imposto come nodo corrente il nodo in OPEN con l'f-cost minore
+rimuovo nodo corrente da OPEN
+e lo aggiungo in CLOSED
 
-//starting node aggiunto a OPEN
+if il nodo corrente == target node allora sono arrivato
 
-//loop
-//nodo corrente: il nodo in OPEN con l'f-cost minore
-//rimuoviamo il nodo corrente da OPEN e lo aggiungiamo a CLOSED
+foreach neighbour del nodo corrente
+if neigbour non è percorribile o è già in close
+skip
 
+if neighbour è più vicino a target node rispetto al nodo corrente || neighbour non è in OPEN
+calcoliamo l'f-cost del neighbour
+imparentiamo il neighbour al nodo corrente
 
-//if nodo corrente é = a destination node 
-//return path
+if neighbour non è in OPEN
+aggiungiamo neighbour a OPEN
 
-//foreach neighbour del nodo corrente
-//se neighbour non è percorribile oppure è in CLOSED
-//skip
-//if il percorso verso neighbour è PIU CORTO o neighbour non è in OPEN
-//calcoliamo il suo f-cost
-//settiamo il nodo corrente come parent di neighbour 
-//se niegbour non è in OPEN ce lo aggiungiamo
+ */
 
 
 
 public class Node
 {
-    public bool walkable;
     public Vector3 worldPosition;
+    public bool walkable;
 
-    public Node(bool _walkable, Vector3 _worldPos)
+    public int gCost;
+    public int hCost;
+    public int FCost { get { return gCost + hCost; } }
+
+    public int gridX, gridY;
+
+    public Node parent;
+
+    public Node(Vector3 _worldPos, bool _walkable, int _gridX, int _gridY)
     {
-        walkable = _walkable;
         worldPosition = _worldPos;
+        walkable = _walkable;
+        gridX = _gridX;
+        gridY = _gridY;
     }
 }

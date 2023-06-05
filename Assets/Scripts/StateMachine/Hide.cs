@@ -51,8 +51,7 @@ public class Hide : AIState
             }
         }
 
-        Debug.Log(Vector3.SqrMagnitude(chosenSpot - npc.transform.position));
-
+        
         if (Vector3.SqrMagnitude(chosenSpot - npc.transform.position) < 11)
         {
             nextState = new Idle(npc, agent, anim, player, checkpoints);

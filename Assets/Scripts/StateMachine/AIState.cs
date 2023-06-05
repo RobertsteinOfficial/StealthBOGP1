@@ -83,6 +83,19 @@ public class AIState
         return false;
     }
 
+    public bool CanSeeMe()
+    {
+        Vector3 direction = npc.transform.position - Camera.main.transform.position;
+        float angle = Vector3.Angle(direction, Camera.main.transform.forward);
+
+        if (angle < visAngle)
+        {
+            return true;
+        }
+
+        return false;
+    }
+
     public bool CanAttackPlayer()
     {
         Vector3 direction = player.position - npc.transform.position;
